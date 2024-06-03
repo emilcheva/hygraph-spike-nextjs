@@ -1,7 +1,6 @@
-import hygraphClient from '@/app/lib/hygraphClient';
-import Link from 'next/link';
+import { hygraphClient } from "@/app/lib/hygraphClient";
+import Link from "next/link";
 const getProducts = async () => {
-
   const { products } = await hygraphClient.request(
     `{
       products {
@@ -9,14 +8,14 @@ const getProducts = async () => {
         name
         id
       }
-    }`
+    }`,
   );
 
   return products;
 };
 
 export function generateMetadata() {
-  return { title: 'Products' };
+  return { title: "Products" };
 }
 
 export default async function Page() {
