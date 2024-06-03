@@ -1,11 +1,8 @@
-import { GraphQLClient } from 'graphql-request';
+import hygraphClient from '@/app/lib/hygraphClient';
 import Link from 'next/link';
 const getProducts = async () => {
-  const hygraph = new GraphQLClient(
-    'https://api-eu-central-1.hygraph.com/v2/ck8sn5tnf01gc01z89dbc7s0o/master'
-  );
 
-  const { products } = await hygraph.request(
+  const { products } = await hygraphClient.request(
     `{
       products {
         slug

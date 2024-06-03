@@ -1,12 +1,8 @@
-import { GraphQLClient } from 'graphql-request';
+import hygraphClient from '@/app/lib/hygraphClient';
 import Link from 'next/link';
 
-const hygraph = new GraphQLClient(
-  'https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clwyy434l008i07ulbk5qbwuw/master'
-);
-
 const getProduct = async (params) => {
-  const { product } = await hygraph.request(
+  const { product } = await hygraphClient.request(
     `query ProductPageQuery($slug: String!) {
       product(where: { slug: $slug }) {
         name
