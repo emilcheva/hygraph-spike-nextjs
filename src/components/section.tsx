@@ -36,12 +36,12 @@ const Section = async ({ slug, className, ...restProps }: SectionProps) => {
       {sections.map((section) => (
         <section
           key={section.id}
-          className={cn("space-y-6", className)}
+          className={cn("space-y-6 max-w-4xl mx-auto py-8", className)}
           {...restProps}
         >
           <div className="space-y-5 text-center">
             <h1 className="text-5xl font-semibold">{section.title}</h1>
-            <p className="text-2xl">{section.description}</p>
+            <p className="text-xl">{section.description}</p>
 
             <CtaButton {...section.ctaButton} />
           </div>

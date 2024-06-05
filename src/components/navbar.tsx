@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import logo from "@/public/images/header-logo.svg";
+import Image from "next/image";
 
 const NavLinks = [
   { id: 1, name: "Home", path: "/" },
@@ -15,9 +17,7 @@ const Navbar = () => {
     <nav className="flex h-32 w-full items-center justify-between">
       <div>
         <Link href="/">
-          <p className="text-2xl font-bold">
-            Next<span className="text-blue-500">Intl</span>
-          </p>
+          <Image src={logo} alt="NextIntl" />
         </Link>
       </div>
       <ul className="flex space-x-10">
@@ -28,7 +28,7 @@ const Navbar = () => {
                 href={link.path}
                 className={
                   isActive(link.path)
-                    ? "underline decoration-blue-500 decoration-4"
+                    ? "underline decoration-red-500 decoration-4"
                     : ""
                 }
               >
