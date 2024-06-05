@@ -42,7 +42,7 @@ const Partnerships = async ({
             })}
           >
             <div
-              className={cn("flex flex-1", {
+              className={cn("flex flex-1 w-full", {
                 "justify-end": index % 2 !== 0,
               })}
             >
