@@ -43,7 +43,7 @@ const Section = async ({ slug, className, ...restProps }: SectionProps) => {
             <h1 className="text-5xl font-semibold">{section.title}</h1>
             <p className="text-xl">{section.description}</p>
 
-            <CtaButton {...section.ctaButton} />
+            {section.ctaButton && <CtaButton {...section.ctaButton} />}
           </div>
         </section>
       ))}
