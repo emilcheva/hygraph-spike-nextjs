@@ -1,10 +1,7 @@
-"use client";
-
 import { hygraphClient } from "@/lib/hygraphClient";
 import { cn } from "@/lib/utils";
 import { gql } from "graphql-request";
 import bgImg from "@/public/images/partners-bg.jpg";
-import { useLocale } from "next-intl";
 
 type Stat = {
   id: string;
@@ -28,8 +25,14 @@ const getStats = async (locale: string) => {
   return stats;
 };
 
-const Stats = async ({ className, ...restProps }: { className: string }) => {
-  const locale = useLocale();
+const Stats = async ({
+  className,
+  locale,
+  ...restProps
+}: {
+  locale: string;
+  className?: string;
+}) => {
   const stats = await getStats(locale);
 
   return (

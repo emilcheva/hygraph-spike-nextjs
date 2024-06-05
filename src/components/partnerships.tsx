@@ -1,4 +1,3 @@
-"use client";
 import { hygraphClient } from "@/lib/hygraphClient";
 import { cn } from "@/lib/utils";
 import { gql } from "graphql-request";
@@ -40,11 +39,12 @@ const getPartnerships = async (locale: string) => {
 
 const Partnerships = async ({
   className,
+  locale,
   ...restProps
 }: {
-  className: string;
+  locale: string;
+  className?: string;
 }) => {
-  const locale = useLocale();
   const partnerships = await getPartnerships(locale);
 
   return (

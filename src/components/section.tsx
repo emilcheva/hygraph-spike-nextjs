@@ -1,5 +1,3 @@
-"use client";
-
 import { hygraphClient } from "@/lib/hygraphClient";
 import { cn } from "@/lib/utils";
 import { gql } from "graphql-request";
@@ -37,7 +35,7 @@ const getSectionBySlug = async (slug: string, locale: string) => {
 
   const { sections } = await hygraphClient.request<{ sections: Section[] }>(
     query,
-    { slug },
+    { slug }
   );
   return sections;
 };
@@ -45,10 +43,10 @@ const getSectionBySlug = async (slug: string, locale: string) => {
 type SectionProps = {
   slug: string;
   className?: string;
+  locale: string;
 };
 
-const Section = async ({ slug, className, ...restProps }: SectionProps) => {
-  const locale = useLocale();
+const Section = async ({ slug, locale, className, ...restProps }: SectionProps) => {
   const sections = await getSectionBySlug(slug, locale);
 
   return (
