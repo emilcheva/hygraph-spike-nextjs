@@ -19,8 +19,21 @@ const query = gql`
   }
 `;
 
+type Partnership = {
+  id: string;
+  title: string;
+  description: string;
+  cardImage: {
+    url: string;
+    width: number;
+    height: number;
+  };
+};
+
 const getPartnerships = async () => {
-  const { partnerships } = await hygraphClient.request(query);
+  const { partnerships } = await hygraphClient.request<{
+    partnerships: Partnership[];
+  }>(query);
   return partnerships;
 };
 

@@ -18,8 +18,21 @@ const query = gql`
   }
 `;
 
+type Section = {
+  id: string;
+  title: string;
+  description: string;
+  ctaButton?: {
+    title: string;
+    href: string;
+  };
+};
+
 const getSectionBySlug = async (slug: string) => {
-  const { sections } = await hygraphClient.request(query, { slug });
+  const { sections } = await hygraphClient.request<{ sections: Section[] }>(
+    query,
+    { slug },
+  );
   return sections;
 };
 

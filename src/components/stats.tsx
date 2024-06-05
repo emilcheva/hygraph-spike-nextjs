@@ -14,8 +14,15 @@ const query = gql`
   }
 `;
 
+type Stat = {
+  id: string;
+  label: string;
+  value: string;
+  description: string;
+};
+
 const getStats = async () => {
-  const { stats } = await hygraphClient.request(query);
+  const { stats } = await hygraphClient.request<{ stats: Stat[] }>(query);
   return stats;
 };
 
