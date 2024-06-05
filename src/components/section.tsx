@@ -8,6 +8,7 @@ type Section = {
   id: string;
   title: string;
   description: string;
+  slug: string;
   ctaButton?: {
     title: string;
     href: string;
@@ -22,6 +23,7 @@ const getSectionBySlug = async (slug: string, locale: string) => {
       locales: [${locale}]
     ){
       id
+      slug
       title
       description
       ctaButton {
@@ -35,7 +37,7 @@ const getSectionBySlug = async (slug: string, locale: string) => {
 
   const { sections } = await hygraphClient.request<{ sections: Section[] }>(
     query,
-    { slug }
+    { slug },
   );
   return sections;
 };
@@ -46,7 +48,12 @@ type SectionProps = {
   locale: string;
 };
 
-const Section = async ({ slug, locale, className, ...restProps }: SectionProps) => {
+const Section = async ({
+  slug,
+  locale,
+  className,
+  ...restProps
+}: SectionProps) => {
   const sections = await getSectionBySlug(slug, locale);
 
   return (
