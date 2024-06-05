@@ -24,6 +24,7 @@ const getPartnerships = async (locale: string) => {
       title
       description
       cardImage {
+        locale
         url
         width
         height
