@@ -7,7 +7,7 @@ This spike demonstrates how to query from Hygraph with `graphql-request` in Next
 ### Download Manually
 
 ```bash
-npx degit hygraph/hygraph-examples/with-nextjs with-nextjs
+npx degit emilcheva/mobisystems-hygraph-spike mobisystems-hygraph-spike
 ```
 
 Install & Run:
