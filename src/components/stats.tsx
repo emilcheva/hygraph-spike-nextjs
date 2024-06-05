@@ -1,18 +1,10 @@
+"use client";
+
 import { hygraphClient } from "@/lib/hygraphClient";
 import { cn } from "@/lib/utils";
 import { gql } from "graphql-request";
 import bgImg from "@/public/images/partners-bg.jpg";
-
-const query = gql`
-  query Stats {
-    stats {
-      id
-      label
-      value
-      description
-    }
-  }
-`;
+import { useLocale } from "next-intl";
 
 type Stat = {
   id: string;
@@ -21,13 +13,24 @@ type Stat = {
   description: string;
 };
 
-const getStats = async () => {
+const getStats = async (locale: string) => {
+  const query = gql`
+  query Stats {
+    stats(locales: [${locale}]) {
+      id
+      label
+      value
+      description
+    }
+  }
+`;
   const { stats } = await hygraphClient.request<{ stats: Stat[] }>(query);
   return stats;
 };
 
 const Stats = async ({ className, ...restProps }: { className: string }) => {
-  const stats = await getStats();
+  const locale = useLocale();
+  const stats = await getStats(locale);
 
   return (
     <section

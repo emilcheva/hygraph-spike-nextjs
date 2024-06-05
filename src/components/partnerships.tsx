@@ -1,23 +1,10 @@
+"use client";
 import { hygraphClient } from "@/lib/hygraphClient";
 import { cn } from "@/lib/utils";
 import { gql } from "graphql-request";
 import Image from "next/image";
 import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
-
-const query = gql`
-  query Partnerships {
-    partnerships {
-      id
-      title
-      description
-      cardImage {
-        url
-        width
-        height
-      }
-    }
-  }
-`;
+import { useLocale } from "next-intl";
 
 type Partnership = {
   id: string;
@@ -30,7 +17,21 @@ type Partnership = {
   };
 };
 
-const getPartnerships = async () => {
+const getPartnerships = async (locale: string) => {
+  const query = gql`
+  query Partnerships {
+    partnerships (locales: [${locale}]) {
+      id
+      title
+      description
+      cardImage {
+        url
+        width
+        height
+      }
+    }
+  }
+`;
   const { partnerships } = await hygraphClient.request<{
     partnerships: Partnership[];
   }>(query);
@@ -43,7 +44,8 @@ const Partnerships = async ({
 }: {
   className: string;
 }) => {
-  const partnerships = await getPartnerships();
+  const locale = useLocale();
+  const partnerships = await getPartnerships(locale);
 
   return (
     <>

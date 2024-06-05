@@ -1,11 +1,28 @@
+"use client";
+
 import { hygraphClient } from "@/lib/hygraphClient";
 import { cn } from "@/lib/utils";
 import { gql } from "graphql-request";
 import CtaButton from "./cta-button";
+import { useLocale } from "next-intl";
 
-const query = gql`
+type Section = {
+  id: string;
+  title: string;
+  description: string;
+  ctaButton?: {
+    title: string;
+    href: string;
+  };
+};
+
+const getSectionBySlug = async (slug: string, locale: string) => {
+  const query = gql`
   query SectionQuery($slug: String!) {
-    sections(where: { slug: $slug }) {
+    sections(
+      where: { slug: $slug }
+      locales: [${locale}]
+    ){
       id
       title
       description
@@ -18,17 +35,6 @@ const query = gql`
   }
 `;
 
-type Section = {
-  id: string;
-  title: string;
-  description: string;
-  ctaButton?: {
-    title: string;
-    href: string;
-  };
-};
-
-const getSectionBySlug = async (slug: string) => {
   const { sections } = await hygraphClient.request<{ sections: Section[] }>(
     query,
     { slug },
@@ -42,7 +48,8 @@ type SectionProps = {
 };
 
 const Section = async ({ slug, className, ...restProps }: SectionProps) => {
-  const sections = await getSectionBySlug(slug);
+  const locale = useLocale();
+  const sections = await getSectionBySlug(slug, locale);
 
   return (
     <>
