@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import { gql } from "graphql-request";
 import Image from "next/image";
 import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { useLocale } from "next-intl";
 
 type Partnership = {
   id: string;
