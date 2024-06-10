@@ -15,37 +15,39 @@ type Partnership = {
   };
 };
 
-const getPartnerships = async (locale: string) => {
+const getPartnerships = async (locale: string, id: string) => {
   const query = gql`
-  query Partnerships {
-    partnerships (locales: [${locale}]) {
-      id
-      title
-      description
-      cardImage {
-        locale
-        url
-        width
-        height
+    query Partnerships($id: ID!, $locale: Locale!) {
+      partnerships(where: { id: $id }, locales: [$locale]) {
+        id
+        title
+        description
+        cardImage {
+          locale
+          url
+          width
+          height
+        }
       }
     }
-  }
-`;
+  `;
   const { partnerships } = await hygraphClient.request<{
     partnerships: Partnership[];
-  }>(query);
+  }>(query, { locale, id });
   return partnerships;
 };
 
-const Partnerships = async ({
+const Partnership = async ({
   className,
   locale,
+  id,
   ...restProps
 }: {
   locale: string;
   className?: string;
+  id: string;
 }) => {
-  const partnerships = await getPartnerships(locale);
+  const partnerships = await getPartnerships(locale, id);
 
   return (
     <>
@@ -85,4 +87,4 @@ const Partnerships = async ({
   );
 };
 
-export default Partnerships;
+export default Partnership;
