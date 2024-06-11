@@ -1,7 +1,7 @@
 import { hygraphClient } from "@/lib/hygraphClient";
 import { cn } from "@/lib/utils";
 import { gql } from "graphql-request";
-import CtaButton from "./cta-button";
+import CtaButton from "@/components/cta-button";
 
 type Section = {
   id: string;
@@ -32,7 +32,7 @@ const getSectionBySlug = async (slug: string, locale: string, id: string) => {
 
   const { sections } = await hygraphClient.request<{ sections: Section[] }>(
     query,
-    { slug, id, locale }
+    { slug, id, locale },
   );
   return sections;
 };

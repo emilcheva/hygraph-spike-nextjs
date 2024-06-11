@@ -2,7 +2,7 @@ import { hygraphClient } from "@/lib/hygraphClient";
 import { cn } from "@/lib/utils";
 import { gql } from "graphql-request";
 import Image from "next/image";
-import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 type Partnership = {
   id: string;

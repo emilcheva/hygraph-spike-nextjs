@@ -1,6 +1,6 @@
 import { hygraphClient } from "@/lib/hygraphClient";
 import { gql } from "graphql-request";
-import * as Blocks from "@/components/index";
+import * as Blocks from "@/components/blocks/index";
 
 type Page = {
   id: string;
@@ -29,11 +29,19 @@ const getPageBySlug = async (slug: string, locale: string) => {
         ...on Partnership{
           id
         }
-        ... on Stat {
-          id
-        }
         ... on Partner {
           id
+        }
+        ... on Grid {
+          id
+          numberOfColumns
+          columns {
+            __typename
+            ... on Stat {
+              id
+              __typename
+            }
+          }
         }
       }
       __typename
@@ -57,7 +65,7 @@ export default async function Page({
 
   return (
     <div className="container space-y-6">
-      {page.blocks.map((block, index) => {
+      {page?.blocks.map((block, index) => {
         // @ts-ignore
         const Component = Blocks[block.__typename];
 
