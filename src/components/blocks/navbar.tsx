@@ -7,12 +7,13 @@ import logo from "@/public/images/header-logo.svg";
 import Image from "next/image";
 
 const NavLinks = [
-  { id: 1, name: "Home", path: "/" },
+  { id: 1, name: "Home", path: "/home" },
   { id: 2, name: "Partners", path: "/partners" },
 ];
 
 const Navbar = () => {
   const pathname = usePathname();
+  console.log(pathname);
   const isActive = (path: string) => path === pathname;
 
   return (
