@@ -13,7 +13,6 @@ const NavLinks = [
 
 const Navbar = () => {
   const pathname = usePathname();
-  console.log(pathname);
   const isActive = (path: string) => path === pathname;
 
   return (

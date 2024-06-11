@@ -1,6 +1,5 @@
 import { hygraphClient } from "@/lib/hygraphClient";
 import { cn } from "@/lib/utils";
-import { stat } from "fs";
 import { gql } from "graphql-request";
 
 type Stat = {
