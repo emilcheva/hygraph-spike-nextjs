@@ -8,6 +8,15 @@ const nextConfig = {
       },
     ],
   },
+  redirects: async () => {
+    return [
+      {
+        source: "/en",
+        destination: "/en/home",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
